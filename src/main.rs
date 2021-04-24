@@ -43,7 +43,7 @@ fn write_range<W: Write>(dest: &mut W, range: &Range<DataType>) -> std::io::Resu
         for (i, c) in r.iter().enumerate() {
             match *c {
                 DataType::Empty => Ok(()),
-                DataType::String(ref s) => write!(dest, "{}", s),
+                DataType::String(ref s) => write!(dest, "{}", s.replace("\n", "")),
                 DataType::Float(ref f) | DataType::DateTime(ref f) => write!(dest, "{}", f),
                 DataType::Int(ref i) => write!(dest, "{}", i),
                 DataType::Error(ref e) => write!(dest, "{:?}", e),
